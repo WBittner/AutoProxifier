@@ -1,0 +1,30 @@
+<html>
+<title>Input TappedOut Stub</title>
+<body style="text-align:center">
+    <input onkeyup="onInput(event)" id="input" autofocus />
+    <br><br>
+    <button id="accept">Accept</button>
+    <button id="cancel">Cancel</button>
+
+    <script>
+        function submit() {
+            require('electron').ipcRenderer.send("deckStub", document.getElementById('input').value);
+            window.close();
+        }
+
+        function cancel() {            
+            require('electron').ipcRenderer.send("cancel");
+            window.close();
+        }
+
+        document.getElementById('accept').addEventListener('click', submit);
+        document.getElementById("cancel").addEventListener("click", cancel);
+
+        function onInput(event) {
+            if(event.keyCode === 13) {
+                submit();
+            }
+        }
+    </script>
+</body>
+</html>
